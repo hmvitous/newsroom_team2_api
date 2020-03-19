@@ -11,6 +11,20 @@
         1,
         null
       ],
+      "/Users/robin.lillqvist/Dev/craftacademy/Newsroom/newsroom_team2_api/app/controllers/application_controller.rb": [
+        1,
+        null
+      ],
+      "/Users/robin.lillqvist/Dev/craftacademy/Newsroom/newsroom_team2_api/app/controllers/api/articles_controller.rb": [
+        1,
+        1,
+        null,
+        2,
+        null,
+        2,
+        null,
+        null
+      ],
       "/Users/robin.lillqvist/Dev/craftacademy/Newsroom/newsroom_team2_api/app/mailers/application_mailer.rb": [
         0,
         0,
@@ -20,20 +34,6 @@
       "/Users/robin.lillqvist/Dev/craftacademy/Newsroom/newsroom_team2_api/app/jobs/application_job.rb": [
         0,
         null,
-        0
-      ],
-      "/Users/robin.lillqvist/Dev/craftacademy/Newsroom/newsroom_team2_api/app/controllers/application_controller.rb": [
-        0,
-        0
-      ],
-      "/Users/robin.lillqvist/Dev/craftacademy/Newsroom/newsroom_team2_api/app/controllers/api/articles_controller.rb": [
-        0,
-        0,
-        null,
-        0,
-        null,
-        0,
-        0,
         0
       ],
       "/Users/robin.lillqvist/Dev/craftacademy/Newsroom/newsroom_team2_api/app/channels/application_cable/connection.rb": [
@@ -49,6 +49,6 @@
         0
       ]
     },
-    "timestamp": 1584645216
+    "timestamp": 1584646014
   }
 }

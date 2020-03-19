@@ -17,9 +17,8 @@ let!(:articles) {5.times {create(:article)}}
     end
 
     it 'returns 5 articles' do
+      binding.pry
       expect(JSON.parse(response.body)["articles"].count).to eq 5
     end
   end
 end
-
-
