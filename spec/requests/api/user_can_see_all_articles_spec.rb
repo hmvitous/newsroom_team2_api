@@ -1,6 +1,5 @@
 RSpec.describe 'GET /api/articles', type: :request do
-let!(:article_1) {create(:article, title: "coronavirus", 
-teaser: "The World goverments cannot manage it", content: "it's spreading all around the world")}
+let!(:articles) {5.times {create(:article)}}
 
   describe 'GET /articles' do
     before do
@@ -17,16 +16,10 @@ teaser: "The World goverments cannot manage it", content: "it's spreading all ar
       get '/api/articles'
     end
 
-    it 'should contain articles_1' do
-      expect(response_json['title']).to eq "coronavirus"
-   end
-   it 'should contain articles_1' do
-    expect(response_json['teaser']).to eq "The World goverments cannot manage it"
- end
-
- it 'should contain articles_1' do
-    expect(response_json['content']).to eq "it's spreading all around the world"
- end
+    it 'returns 5 articles' do
+      expect(JSON.parse(response.body)["articles"].count).to eq 5
+    end
+  end
 end
 
 
