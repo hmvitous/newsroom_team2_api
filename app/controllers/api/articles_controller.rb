@@ -1,10 +1,16 @@
 class Api::ArticlesController < ApplicationController
   def index
-    render json: {header: 'Pong', content:'blablabla.', teaser: "I'm your father."}, status: 200
+    collection_articles = Article.all
+    render json: { articles: collection_articles }, status: 200
   end
 
   def create
-    render plain: params [:articles].inspect
+    @article = Article.new(article_params)
+    if @article.save
+      redirect_to @article, :notice => "Article was successfully created."
+    else
+      render 'new'
+    end
   end
-
+  
 end

@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :article do
-    title { "MyString" }
-    teaser { "MyText" }
-    content { "MyText" }
+    title { "CoronaVirus" }
+    teaser { "Sweden is free of Coronavirus" }
+    content { "blahblahblha blahblah blah" }
   end
 end
