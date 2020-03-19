@@ -1,19 +1,23 @@
-require 'rails_helper'
-
-RSpec.describe Api::ArticleController, type: :request do
+RSpec.describe 'GET /api/articles', type: :request do
   describe 'GET /articles' do
     before do
       get '/api/articles'
     end
 
     it 'should return a 200 response' do
-      expect(response).to have_http_status 200
+      expect(response.status).to eq 200
     end
 
-    it 'should return Pong' do
-      json_response = JSON.parse(response.body)
+    it 'should return a header' do
+      expect(response_json['header']).to eq 'Pong'
+    end
 
-      expect(json_response['message']).to eq 'Pong'
+    it 'should return a content' do
+      expect(response_json['content']).to eq 'blablabla.'
+    end
+
+    it 'should return a teaser' do
+      expect(response_json['teaser']).to eq "I'm your father."
     end
   end
 end
