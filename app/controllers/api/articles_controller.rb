@@ -10,8 +10,7 @@ class Api::ArticlesController < ApplicationController
   
   def show
     article = Article.find(params[:id])
-    binding.pry
-    if article.empty?
+    if article.nil?
       render json: {error_message: "Article doesn't exist"}, status: 404
     else
       render json: {id: article.id, title: article.title, teaser: article.teaser, content: article.content}, status: 200
