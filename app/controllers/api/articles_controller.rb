@@ -1,5 +1,5 @@
 class Api::ArticlesController < ApplicationController
-    def index
+  def index
     collection_articles = Article.all
      if collection_articles.empty?
       render json: { error_message: "No articles has been found" }, status: 404
