@@ -13,6 +13,20 @@ RSpec.describe 'Get/api/articles/', type: :request do
 
     it 'should return a 200 response' do
       expect(response.status).to eq 200
+      binding.pry
     end
+
+    it 'should return a 200 response' do
+      expect(response.id).to eq 200
+    end
+
+    it 'should return a 200 response' do
+      expect(response.title).to eq 200
+    end
+
+    it 'should return a 200 response' do
+      expect(response.title).to eq 200
+    end
+
   end
 end
