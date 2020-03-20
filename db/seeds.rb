@@ -1,4 +1,5 @@
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+articles = Article.create(title: "Toilet paper!", teaser: "The world is running out of hope.",
+     content: "People are bulking tons of toilet paper that's an issue for everyone" )
+
+articles = Article.create(title: "Toilet", teaser: "The new gold",
+    content: "people are selling toilet paper to gold prices!" )
