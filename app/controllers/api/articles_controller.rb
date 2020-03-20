@@ -7,4 +7,8 @@ class Api::ArticlesController < ApplicationController
       render json: { articles: collection_articles }, status: 200
     end
   end
+  
+  def show
+    article = Article.find(params[:id])
+  end
 end
