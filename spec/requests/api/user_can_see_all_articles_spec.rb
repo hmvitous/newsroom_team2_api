@@ -1,7 +1,6 @@
 RSpec.describe 'GET /api/articles', type: :request do
-let!(:articles) {5.times {create(:article)}}
-
   describe 'GET /articles' do
+    let!(:articles){create(:article)}
     before do
       get '/api/articles'
     end
@@ -11,14 +10,13 @@ let!(:articles) {5.times {create(:article)}}
     end
   end
   
-   describe 'GET /articles' do
+  describe 'GET, No articles been found' do
     before do
-      get '/api/articles'
-    end
+    get '/api/articles'
+  end
 
-    it 'returns 5 articles' do
-      binding.pry
-      expect(JSON.parse(response.body)["articles"].count).to eq 5
+    it 'No articles been found' do
+      expect(response.status).to eq 404
     end
   end
 end

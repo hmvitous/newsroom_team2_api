@@ -26,9 +26,11 @@ RSpec.describe Article, type: :model do
     it "expects to contain title" do
     expect(@article.title).to eq("Corona is viral")
     end
+
     it "expects to contain the description" do      
       expect(@article.teaser).to eq("Is there something you can do?")
     end
+    
     it "expects to contain the description" do      
       expect(@article.content).to eq("NO. sorry there isn't.")
     end
