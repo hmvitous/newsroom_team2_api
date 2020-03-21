@@ -5,9 +5,11 @@ RSpec.describe Api::ArticlesController, type: :request do
     before do
       post '/api/articles/create',
         params: {
-            title: "Redbull gives you wings0",
-            teaser: "Redbull gives you wings1",
-            content: "Redbull gives you wings2"
+          article: {  
+            title: "Coronavirus",
+            teaser: "Things are bad",
+            content: "It will get worse."
+          }
         },
         headers: headers
     end
@@ -19,7 +21,7 @@ RSpec.describe Api::ArticlesController, type: :request do
 
     it 'succesfully creates Article entry' do
         entry = Article.last
-        expect(entry.article.title).to eq "Redbull gives you wings"
+        expect(entry.title).to eq "Coronavirus"
     end
   end
 end

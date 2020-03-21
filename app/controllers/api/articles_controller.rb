@@ -25,7 +25,7 @@ class Api::ArticlesController < ApplicationController
 
   def create 
     article = Article.create(article_params)
-    binding.pry
+    render json: {message:"Your article is ready for review."}, status: 200
   end
 
   private
