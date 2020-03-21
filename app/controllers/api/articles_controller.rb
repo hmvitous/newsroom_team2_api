@@ -23,10 +23,17 @@ class Api::ArticlesController < ApplicationController
     end
   end 
 
-
   def create 
-    
+    article = Article.create(article_params)
     binding.pry
-    
+  end
+
+  private
+  def article_params
+    params.require(:article).permit(:title, :teaser, :content)
   end
 end
+
+
+
+
