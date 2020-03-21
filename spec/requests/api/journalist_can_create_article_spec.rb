@@ -1,14 +1,13 @@
 RSpec.describe Api::ArticlesController, type: :request do
-let(:article) {create(:article)}
+let!(:article) {create(:article)}
+
   describe 'POST /api/articles_controller' do
     before do
-        post '/api/articles/create',
+      post '/api/articles/create',
         params: {
-            article: {
-                title: "Redbull gives you wings"
-                teaser: "It's improves productivity for programmers"
-                content: "Coders are buying Redbull to improve their performance while coding, business are against this practices!"
-            },
+            title: article.title,
+            teaser: article.teaser,
+            content: article.content
         }
     end
 
