@@ -4,7 +4,7 @@ class Api::ArticlesController < ApplicationController
   def index
     collection_articles = Article.all
     if collection_articles.empty?
-      render json: { error_message: 'No articles has been found' }, status: 404
+      render json: { message: 'No articles has been found' }, status: 404
     else
       render json: { articles: collection_articles }, status: 200
    end
@@ -22,10 +22,13 @@ class Api::ArticlesController < ApplicationController
       render json: article, status: 200
     end
   end 
-
+  
   def create 
-    article = Article.create(article_params)
-    render json: {message:"Your article is ready for review."}, status: 200
+    article = Article.new(article_params)
+    if article.new_record?
+      Article.create(article_params)
+      render json: {message:"Your article is ready for review."}, status: 200
+    end
   end
 
   private

@@ -20,6 +20,7 @@ RSpec.describe Api::ArticlesController, type: :request do
     end
 
     it 'succesfully creates Article entry' do
+      binding.pry
         entry = Article.last
         expect(entry.title).to eq "Coronavirus"
     end
