@@ -21,22 +21,19 @@ class Api::ArticlesController < ApplicationController
     else
       render json: article, status: 200
     end
-  end 
-  
-  def create 
+  end
+
+  def create
     article = Article.new(article_params)
     if article.new_record?
       Article.create(article_params)
-      render json: {message:"Your article is ready for review."}, status: 200
+      render json: { message: 'Your article is ready for review.' }, status: 200
     end
   end
 
   private
+
   def article_params
     params.require(:article).permit(:title, :teaser, :content)
   end
 end
-
-
-
-
