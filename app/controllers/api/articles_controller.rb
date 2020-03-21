@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::ArticlesController < ApplicationController
   def index
     collection_articles = Article.all
@@ -9,15 +11,15 @@ class Api::ArticlesController < ApplicationController
   end
 
   def show
-    article = Article.find(params[:id]) rescue nil
+    article = begin
+                Article.find(params[:id])
+              rescue StandardError
+                nil
+              end
     if article.nil?
-      render json: { message: "Sorry your article wasn't found" }, status: 404 
+      render json: { message: "Sorry your article wasn't found" }, status: 404
     else
       render json: article, status: 200
     end
   end
-
-  
-
-
 end

@@ -1,7 +1,6 @@
 RSpec.describe Api::ArticlesController, type: :request do
 let(:article) {create(:article)}
-
-    describe 'POST /api/articles_controller' do
+  describe 'POST /api/articles_controller' do
     before do
         post '/api/articles/create',
         params: {
@@ -21,5 +20,5 @@ let(:article) {create(:article)}
         entry = Article.last
         expect(entry.article.title).to eq "Redbull gives you wings"
     end
-    end
+  end
 end
