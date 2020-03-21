@@ -11,7 +11,7 @@ class Api::ArticlesController < ApplicationController
   def show
     article = Article.find(params[:id]) rescue nil
     if article.nil?
-      render json: { message: "Sorry your article wasn't found"}, status: 404 
+      render json: { message: "Sorry your article wasn't found" }, status: 404 
     else
       render json: article, status: 200
     end
