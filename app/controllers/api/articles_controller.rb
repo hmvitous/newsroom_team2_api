@@ -1,19 +1,36 @@
+# frozen_string_literal: true
+
 class Api::ArticlesController < ApplicationController
   def index
     collection_articles = Article.all
     if collection_articles.empty?
-      render json: { error_message: 'No articles has been found' }, status: 404
+      render json: { message: 'No articles has been found' }, status: 404
     else
       render json: { articles: collection_articles }, status: 200
    end
   end
 
   def show
-    article = Article.find(params[:id]) rescue nil
+    article = Article.find(params[:id])
     if article.nil?
-      render json: { message: "Sorry your article wasn't found" }, status: 404 
+      render json: { message: "Sorry your article wasn't found" }, status: 404
     else
       render json: article, status: 200
     end
+  end
+
+  def create
+    article = Article.create(article_params)
+    if article.persisted?
+      render json: { message: 'Your article is ready for review.' }, status: 200
+    else
+      render json: { message: 'Your article was not saved.' }, status: 206
+    end
+  end
+
+  private
+
+  def article_params
+    params.require(:article).permit(:title, :teaser, :content)
   end
 end
