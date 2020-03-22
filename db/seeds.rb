@@ -3,3 +3,5 @@ articles = Article.create(title: "Toilet paper!", teaser: "The world is running 
 
 articles = Article.create(title: "Toilet", teaser: "The new gold",
     content: "people are selling toilet paper to gold prices!" )
+
+users = User.create(email:'journalist@mail.com', password:, password_confirmation:)

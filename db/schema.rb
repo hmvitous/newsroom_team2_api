@@ -35,6 +35,8 @@ ActiveRecord::Schema.define(version: 2020_03_22_092038) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "role"
+    t.string "name"
     t.string "email"
     t.integer "sign_in_count", default: 0
     t.datetime "current_sign_in_at"
