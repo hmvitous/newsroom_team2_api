@@ -18,7 +18,6 @@ coverage/
 /storage/*
 !/storage/.keep
 .byebug_history
-.solargraph.yml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
