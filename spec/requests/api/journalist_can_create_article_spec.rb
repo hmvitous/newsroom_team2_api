@@ -5,11 +5,13 @@ RSpec.describe Api::ArticlesController, type: :request do
 
   describe 'POST /api/articles_controller' do
     before do
-      post '/api/articles/create',
+      post '/api/articles',
            params: {
+             article: {
              title: 'Coronavirus',
              teaser: 'Things are bad',
              content: 'It will get worse.'
+             }
            },
            headers: headers
     end
