@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 RSpec.describe 'Get/api/articles/', type: :request do
   describe 'GET/articles' do
     before do
@@ -15,9 +17,16 @@ RSpec.describe 'Get/api/articles/', type: :request do
   end
 
   describe 'GET/articles [sad path]' do
-    it 'should return a 404 response' do
+    before do
       get '/api/articles/2'
+    end
+
+    it 'should return a 404 response' do
       expect(response.status).to eq 404
+    end
+
+    it 'should return cannot find the desired article' do
+      expect(response_json['error']).to eq "Couldn't find Article with 'id'=2"
     end
   end
 end
