@@ -10,7 +10,8 @@ RSpec.describe Api::ArticlesController, type: :request do
              article: {
              title: 'Coronavirus',
              teaser: 'Things are bad',
-             content: 'It will get worse.'
+             content: 'It will get worse.',
+             premium_article: true
              }
            },
            headers: headers
@@ -23,6 +24,29 @@ RSpec.describe Api::ArticlesController, type: :request do
     it 'succesfully creates Article entry' do
       entry = Article.last
       expect(entry.title).to eq 'Coronavirus'
+    end
+  end
+
+    describe '[Sad path] POST /api/articles_controller' do
+      before do
+        post '/api/articles',
+          params: {
+            article: {
+            title: 'Coronavirus',
+            teaser: 'Things are bad',
+            content: '',
+            premium_article: true
+            }
+          },
+          headers: headers
+    end
+    
+    it 'returns a 206 response status' do
+      expect(response.status).to eq 206
+    end
+
+    it 'does not create an Article entry' do
+      expect(response_json["message"]).to eq 'Your article was not saved.'
     end
   end
 end
