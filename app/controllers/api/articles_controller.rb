@@ -16,4 +16,8 @@ class Api::ArticlesController < ApplicationController
       render json: article, status: 200
     end
   end
+
+  def create
+    binding.pry
+  end
 end
