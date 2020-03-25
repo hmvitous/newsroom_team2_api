@@ -6,14 +6,19 @@ RSpec.describe 'POST /auth/sign_in', type: :request do
   let(:expected_response) do
     {
       'data' => {
-        'id' => user.id, 'role' => user.role, 'name' => user.name, 'uid' => user.email, 'email' => user.email,
-        'provider' => 'email', 'allow_password_change' => false
+        'id' => user.id,
+        'role' => user.role,
+        'name' => user.name,
+        'uid' => user.email,
+        'email' => user.email,
+        'provider' => 'email', 
+        'allow_password_change' => false
       }
     }
   end
   describe 'with valid credentials' do
     before do
-      post '/auth/sign_in',
+      post '/api/auth/sign_in',
            params: {
              email: user.email,
              password: user.password
@@ -32,7 +37,7 @@ RSpec.describe 'POST /auth/sign_in', type: :request do
 
   describe 'with invalid password' do
     before do
-      post '/auth/sign_in',
+      post '/api/auth/sign_in',
            params: {
              email: user.email,
              password: 'wrong_password'
@@ -51,7 +56,7 @@ RSpec.describe 'POST /auth/sign_in', type: :request do
 
   describe 'with invaled email' do
     before do
-      post '/auth/sign_in',
+      post '/api/auth/sign_in',
            params: {
              email: 'wrong@email.com',
              password: user.password

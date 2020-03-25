@@ -1,4 +1,5 @@
 class Api::ArticlesController < ApplicationController
+ 
   def index
     collection_articles = Article.all
     if collection_articles.empty?

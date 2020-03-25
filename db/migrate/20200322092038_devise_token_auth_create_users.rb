@@ -29,7 +29,7 @@ class DeviseTokenAuthCreateUsers < ActiveRecord::Migration[6.0]
       # t.datetime :locked_at
 
       ## User Info
-      t.string :role
+      t.integer :role, default: 0
       t.string :name
       t.string :email
       t.integer :sign_in_count, default: 0
