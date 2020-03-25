@@ -1,4 +1,6 @@
 class Api::ArticlesController < ApplicationController
+  before_action :authenticate_user!, only: [ :create ] 
+  
   def index
     collection_articles = Article.all
     if collection_articles.empty?
@@ -17,7 +19,7 @@ class Api::ArticlesController < ApplicationController
     end
   end
 
-  def create
+  def create #check if user.role it's journalist else render error status.
     binding.pry
   end
 end
