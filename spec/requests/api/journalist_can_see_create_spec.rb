@@ -34,9 +34,8 @@ RSpec.describe 'POST /api/articles', type: :request do
       post '/api/articles'
     end
 
-    it 'should return a 200 response' do
-      binding.pry
-      expect(error.message).to eq "blabla"
+    it 'should return a 404 response' do
+      expect(response.error).to eq "Not Found"
     end
   end
 
