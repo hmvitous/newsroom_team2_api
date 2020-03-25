@@ -49,8 +49,11 @@ RSpec.describe 'POST /api/articles', type: :request do
       end
 
       it 'returns status 406' do
+        expect(response.status).to eq 406
       end
+
       it 'returns error message' do
+        expect(response_json["message"]).to eq "Request failed with status code 406"
       end
     end
 
