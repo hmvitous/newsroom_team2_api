@@ -21,7 +21,7 @@ ActiveRecord::Schema.define(version: 2020_03_24_131210) do
     t.text "content"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.boolean "premium_article"
+    t.integer "article_class", default: 0
   end
 
 end

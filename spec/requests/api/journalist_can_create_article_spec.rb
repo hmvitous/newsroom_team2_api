@@ -11,7 +11,7 @@ RSpec.describe Api::ArticlesController, type: :request do
              title: 'Coronavirus',
              teaser: 'Things are bad',
              content: 'It will get worse.',
-             premium_article: true
+             premium_article: 0
              }
            },
            headers: headers
@@ -35,14 +35,14 @@ RSpec.describe Api::ArticlesController, type: :request do
             title: 'Coronavirus',
             teaser: 'Things are bad',
             content: '',
-            premium_article: true
+            premium_article: 1
             }
           },
           headers: headers
     end
     
     it 'returns a 206 response status' do
-      expect(response.status).to eq 206
+      expect(response.status).to eq 406
     end
 
     it 'does not create an Article entry' do

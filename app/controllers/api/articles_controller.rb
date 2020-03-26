@@ -20,7 +20,7 @@ class Api::ArticlesController < ApplicationController
     if article.persisted?
       render json: { message: 'Your article is ready for review.' }, status: 200
     else
-      render json: { message: 'Your article was not saved.' }, status: 206
+      render json: { message: 'Your article was not saved.' }, status: 406
     end
   end
 
