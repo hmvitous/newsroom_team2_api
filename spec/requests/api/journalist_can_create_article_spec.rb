@@ -11,7 +11,7 @@ RSpec.describe Api::ArticlesController, type: :request do
              title: 'Coronavirus',
              teaser: 'Things are bad',
              content: 'It will get worse.',
-             article_class: 0
+             article_class: "free"
              }
            },
            headers: headers
@@ -35,7 +35,7 @@ RSpec.describe Api::ArticlesController, type: :request do
             title: 'Coronavirus',
             teaser: 'Things are bad',
             content: '',
-            article_class: 1
+            article_class: "premium"
             }
           },
           headers: headers
