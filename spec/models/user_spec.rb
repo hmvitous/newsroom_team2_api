@@ -9,12 +9,14 @@ RSpec.describe User, type: :model do
     it { is_expected.to have_db_column :encrypted_password }
     it { is_expected.to have_db_column :email }
     it { is_expected.to have_db_column :tokens }
+    it { is_expected.to have_db_column :role }
   end
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of :email }
+    it { is_expected.to validate_presence_of :role }
     it { is_expected.to validate_confirmation_of :password }
-
+    
     context 'should not have an invalid email address' do
       emails = ['asdasd@ dsd.com', '@thomas.se', 'AnotherTEST @gmail.com']
       emails.each do |email|
