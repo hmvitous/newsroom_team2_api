@@ -1,9 +1,11 @@
 # frozen_string_literal: true
 
 RSpec.describe Api::ArticlesController, type: :request do
-  let(:headers) { { HTTP_ACCEPT: 'application/json' } }
+  let(:journalist) { create(:user, role:'journalist') }  
+  let(:journalist_credentials) { journalist.create_new_auth_token }
+  let(:journalist_headers) { { HTTP_ACCEPT: 'application/json' }.merge!(journalist_credentials) }
 
-  describe 'POST /api/articles_controller' do
+  describe 'Journalist creates an article' do
     before do
       post '/api/articles',
            params: {
@@ -14,7 +16,7 @@ RSpec.describe Api::ArticlesController, type: :request do
              article_class: "free"
              }
            },
-           headers: headers
+           headers: journalist_headers
     end
 
     it 'returns a 200 response status' do
@@ -27,7 +29,7 @@ RSpec.describe Api::ArticlesController, type: :request do
     end
   end
 
-    describe '[Sad path] POST /api/articles_controller' do
+    describe '[Sad path] Journalist creates an article' do
       before do
         post '/api/articles',
           params: {
@@ -38,7 +40,7 @@ RSpec.describe Api::ArticlesController, type: :request do
             article_class: "premium"
             }
           },
-          headers: headers
+          headers: journalist_headers
     end
     
     it 'returns a 406 response status' do
