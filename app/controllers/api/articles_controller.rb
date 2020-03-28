@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Api::ArticlesController < ApplicationController
+  before_action :authenticate_user!, only: [ :create ]
  
   def index
     collection_articles = Article.all
@@ -16,13 +17,18 @@ class Api::ArticlesController < ApplicationController
     render json: article, status: 200
   end
 
-  def create
-    article = Article.create(article_params)
-    if article.persisted?
-      render json: { message: 'Your article is ready for review.' }, status: 200
+  def create #Needs refactoring
+    user = current_user
+    if user.role === "journalist"
+      article = Article.create(article_params)
+      if article.persisted?
+        render json: { message: 'Your article is ready for review.' }, status: 200
+      else
+        render json: { message: 'Your article was not saved.' }, status: 406
+      end
     else
-      render json: { message: 'Your article was not saved.' }, status: 406
-    end
+      render json: { message: 'You are not authorized.' }, status: 401
+    end  
   end
 
   private

@@ -73,5 +73,9 @@ RSpec.describe Api::ArticlesController, type: :request do
       it 'returns a 401 response status' do
         expect(response.status).to eq 401
       end
+
+      it 'returns not authorize message ' do
+        expect(response_json["message"]).to eq 'You are not authorized.'
+      end
     end
   end
