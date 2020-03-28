@@ -78,6 +78,7 @@ RSpec.describe Api::ArticlesController, type: :request do
       end
 
       it 'returns not authorize message ' do
+        binding.pry
         expect(response_json["message"]).to eq 'You are not authorized.'
       end
     end
