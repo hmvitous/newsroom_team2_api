@@ -9,6 +9,9 @@ RSpec.describe Api::ArticlesController, type: :request do
   let(:user_credentials) { user.create_new_auth_token }
   let(:user_headers) { { HTTP_ACCEPT: 'application/json' }.merge!(user_credentials) }
 
+  let(:visitor) { create(:user, role: '') }  
+  let(:visitor_headers) { { HTTP_ACCEPT: 'application/json' } }
+
   describe 'Journalist creates an article' do
     before do
       post '/api/articles',
@@ -67,7 +70,7 @@ RSpec.describe Api::ArticlesController, type: :request do
               article_class: "free"
               }
             },
-            headers: user_credentials
+            headers: user_headers
       end
 
       it 'returns a 401 response status' do
@@ -76,6 +79,25 @@ RSpec.describe Api::ArticlesController, type: :request do
 
       it 'returns not authorize message ' do
         expect(response_json["message"]).to eq 'You are not authorized.'
+      end
+    end
+
+    describe 'Visitor tries to creates an article' do
+      before do
+        post '/api/articles',
+            params: {
+              article: {
+              title: 'Coronavirus',
+              teaser: 'Things are bad',
+              content: 'It will get worse.',
+              article_class: "free"
+              }
+            },
+            headers: visitor_headers
+      end
+
+      it 'returns a 401 response status' do
+        expect(response.status).to eq 401
       end
     end
   end
