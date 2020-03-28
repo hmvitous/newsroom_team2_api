@@ -16,6 +16,7 @@ RSpec.describe 'POST /auth/sign_in', type: :request do
       }
     }
   end
+  
   describe 'with valid credentials' do
     before do
       post '/api/auth/sign_in',
@@ -27,7 +28,7 @@ RSpec.describe 'POST /auth/sign_in', type: :request do
     end
 
     it 'returns 200 response status' do
-      expect(response). to have_http_status 200
+      expect(response).to have_http_status 200
     end
 
     it 'returns the expected response' do

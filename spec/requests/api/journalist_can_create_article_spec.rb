@@ -5,6 +5,10 @@ RSpec.describe Api::ArticlesController, type: :request do
   let(:journalist_credentials) { journalist.create_new_auth_token }
   let(:journalist_headers) { { HTTP_ACCEPT: 'application/json' }.merge!(journalist_credentials) }
 
+  let(:user) { create(:user, role:'registered_user') }  
+  let(:user_credentials) { user.create_new_auth_token }
+  let(:user_headers) { { HTTP_ACCEPT: 'application/json' }.merge!(user_credentials) }
+
   describe 'Journalist creates an article' do
     before do
       post '/api/articles',
@@ -51,4 +55,23 @@ RSpec.describe Api::ArticlesController, type: :request do
       expect(response_json["message"]).to eq 'Your article was not saved.'
     end
   end
-end
+
+    describe 'Registered user tries to creates an article' do
+      before do
+        post '/api/articles',
+            params: {
+              article: {
+              title: 'Coronavirus',
+              teaser: 'Things are bad',
+              content: 'It will get worse.',
+              article_class: "free"
+              }
+            },
+            headers: user_credentials
+      end
+
+      it 'returns a 401 response status' do
+        expect(response.status).to eq 401
+      end
+    end
+  end
