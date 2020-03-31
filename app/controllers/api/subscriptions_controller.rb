@@ -8,7 +8,7 @@ class Api::SubscriptionsController < ApplicationController
       begin
           customer = Stripe::Customer.list(email: params[:email]).data.first
           customer ||= Stripe::Customer.create({ email: params[:email], source: params[:stripeToken] })
-          subscription = Stripe::Subscription.create({ customer: customer.id, plan: 'basic_subscription' })
+          subscription = Stripe::Subscription.create({ customer: customer.id, plan: 'urban_subscription' })
 
           if Rails.env.test?
             invoice = Stripe::Invoice.create({
