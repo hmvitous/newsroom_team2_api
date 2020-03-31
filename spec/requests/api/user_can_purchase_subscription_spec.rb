@@ -1,6 +1,9 @@
 RSpec.describe 'POST api/subscription', type: :request do
-    let!(:stripe_helper)
+    let!(:stripe_helper) { StripeMock.create_test_helper }
+    before(:each) { StripeMock.start }
+    after(:each) { StripeMock.stop }
 
+    let(:card_token) { stripe_helper.generate_card_token }
 
     let(:user) { create(:user, role: 'registered_user') }
     let(:user_credentials) { user.create_new_auth_token }
@@ -10,7 +13,7 @@ RSpec.describe 'POST api/subscription', type: :request do
     before do
         post '/api/subscriptions',
         params: {
-            stripeToken: "123456",
+            stripeToken: card_token,
             email: "user@mail.com"
         }
         headers: headers
