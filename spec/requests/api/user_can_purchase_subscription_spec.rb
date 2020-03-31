@@ -9,13 +9,13 @@ RSpec.describe 'POST api/subscription', type: :request do
     let(:invalid_token) { "12345678910" }
 
     let(:product) {stripe_helper.create_product}
-    let(:plan) { stripe_helper.create_plan(
-        id: 'platinum_plan',
-        amount: 1000000,
+    let!(:plan) { stripe_helper.create_plan(
+        id: 'urban_subscription',
+        amount: 699,
         currency: 'usd',
-        interval: 'month',
-        interval_count: 12,
-        name: ''
+        interval: 'year',
+        interval_count: 1,
+        name: 'Urban living subscription',
         product: product.id
     )}
 
@@ -29,21 +29,17 @@ RSpec.describe 'POST api/subscription', type: :request do
         params: {
             stripeToken: card_token,
             email: "user@mail.com"
-        }
+        },
         headers: headers
         user.reload
     end
 
-    it "check if subcription route is there" do
+    it "check if subscription route is there" do
         expect(response.status).to eq 200
     end
 
-    it "check if user bought a subcription" do
-        expect(response_json['status']).to eq "Transaction cleared"
-    end
-
-    it 'creates or retrieves a customer on stripe' do
-        expect(Stripe::Customer.list.data.first.email).to eq ''
+    it "check if user bought a subscription" do
+        expect(response_json['message']).to eq "Transaction cleared"
     end
   end
 

@@ -30,8 +30,8 @@ class Api::SubscriptionsController < ApplicationController
           else
             stripe_error_handler('Transaction did not go through')
           end
-      rescue StandardError => e
-        stripe_error_handler(error_message)
+      rescue => error
+        stripe_error_handler(error.message)
         end
     else
       stripe_error_handler('No stripe token sent')
