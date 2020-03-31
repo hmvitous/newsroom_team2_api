@@ -80,26 +80,24 @@ RSpec.describe 'POST api/subscription', type: :request do
     it "error message for missing token" do
         expect(response_json['error_message']).to eq "No stripe token sent"
     end
-
   end
 
-#   describe "When user is not login" do
-#     before do
-#         post '/api/subscriptions',
-#         params: {
-#             stripeToken: card_token,
-#         }
-#     end
+  describe "When user is not login" do
+    before do
+        post '/api/subscriptions',
+        params: {
+            stripeToken: card_token,
+        }
+    end
 
-#     it "check if subcription route is there" do
-#         expect(response.status).to eq 200
-#     end
+    it "user not logged in" do
+        expect(response.status).to eq 401
+    end
 
-#     it "check if user bought a subcription" do
-#         expect(response_json['status']).to eq "paid"
-#     end
-
-#   end
+    it "user not logged in error message" do
+        expect(response_json['errors'].first).to eq "You need to sign in or sign up before continuing."
+    end
+  end
 
 #   describe "When stripe declines subscription for user" do
 #     before do
