@@ -99,26 +99,25 @@ RSpec.describe 'POST api/subscription', type: :request do
     end
   end
 
-#   describe "When stripe declines subscription for user" do
-#     before do
+  describe "When stripe declines subscription for user" do
+    before do
+        custom_error = StandardError.new("Subscription couldn't be created")
+        StripeMock.prepare_error(custom_error, :create_subscription )
+        post '/api/subscriptions',
+        params: {
+            stripeToken: card_token,
+            email: user.email
+        },
+        headers: headers
+        user.reload
+    end
 
-#         custom_error = StandarError.new("Subscription couldn't be created")
-#         StripeMock.prepare_error(custom_error, :create_subscription )
-#         post '/api/subscriptions',
-#         params: {
-#             stripeToken: card_token,
-#             email: user.email
-#         }
-#         headers: headers
-#         user.reload
-#     end
+    it "stripe decline error response status" do
+        expect(response.status).to eq 400
+    end
 
-#     it "check if subcription route is there" do
-#         expect(response.status).to eq 400
-#     end
-
-#     it "returns error message" do
-#         expect(response_json['status']).to eq "paid"
-#     end
-#   end
+    it "returns error message" do
+        expect(response_json['error_message']).to eq "Subscription couldn't be created"
+    end
+  end
 end
