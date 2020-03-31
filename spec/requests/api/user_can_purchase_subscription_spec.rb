@@ -15,5 +15,9 @@ RSpec.describe 'POST api/subscription', type: :request do
     it "check if user bought a subcription" do
         expect(response_json['status']).to eq "paid"
     end
+
+    # it 'creates or retrieves a customer on stripe' do
+    #     expect(Stripe::Customer.list.data.first.email).to eq ''
+    # end
   end
 end
