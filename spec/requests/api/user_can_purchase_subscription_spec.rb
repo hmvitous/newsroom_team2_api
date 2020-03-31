@@ -43,29 +43,26 @@ RSpec.describe 'POST api/subscription', type: :request do
     end
   end
 
-#   describe "Unsuccessfully invalid token" do
-#     before do
-#         post '/api/subscriptions',
-#         params: {
-#             stripeToken: invalid_token,
-#             email: "user@mail.com"
-#         }
-#         headers: headers
-#         user.reload
-#     end
+  describe "Unsuccessfully invalid token" do
+    before do
+        post '/api/subscriptions',
+        params: {
+            stripeToken: invalid_token,
+            email: "user@mail.com"
+        },
+        headers: headers
+        user.reload
+    end
 
-#     it "check if subcription route is there" do
-#         expect(response.status).to eq 400
-#     end
+    it "user token invalid" do
+      binding.pry
+        expect(response.status).to eq 400
+    end
 
-#     it "check if user bought a subcription" do
-#         expect(response_json['status']).to eq "paid"
-#     end
-
-#     it 'creates or retrieves a customer on stripe' do
-#         expect(Stripe::Customer.list.data.first.email).to eq ''
-#     end
-#   end
+    it "invalid token error message" do
+        expect(response_json['error_message']).to eq "Invalid token id: 12345678910"
+    end
+  end
 
 #   describe "Without token" do
 #     before do
@@ -86,9 +83,6 @@ RSpec.describe 'POST api/subscription', type: :request do
 #         expect(response_json['status']).to eq "paid"
 #     end
 
-#     it 'creates or retrieves a customer on stripe' do
-#         expect(Stripe::Customer.list.data.first.email).to eq ''
-#     end
 #   end
 
 #   describe "When user is not login" do
@@ -107,9 +101,6 @@ RSpec.describe 'POST api/subscription', type: :request do
 #         expect(response_json['status']).to eq "paid"
 #     end
 
-#     it 'creates or retrieves a customer on stripe' do
-#         expect(Stripe::Customer.list.data.first.email).to eq ''
-#     end
 #   end
 
 #   describe "When stripe declines subscription for user" do
