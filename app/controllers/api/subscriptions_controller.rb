@@ -6,8 +6,8 @@ class Api::SubscriptionsController < ApplicationController
   def create
     if params[:stripeToken]
       begin
-          customer = Stripe::Customer.list(email: params[:email]).data.first
-          customer = Stripe::Customer.create({ email: params[:email], source: params[:stripeToken] })
+          customer = Stripe::Customer.list(email: current_user.email).data.first
+          customer = Stripe::Customer.create({ email: current_user.email, source: params[:stripeToken] })
           subscription = Stripe::Subscription.create({ customer: customer.id, plan: 'urban_subscription' })
 
           if Rails.env.test?
@@ -34,7 +34,7 @@ class Api::SubscriptionsController < ApplicationController
         stripe_error_handler(error.message)
         end
     else
-      stripe_error_handler('No stripe token sent')
+      stripe_error_handler('Internal problem with your payment. Please contact customer support')
     end
    end
 
