@@ -9,6 +9,7 @@ gem 'bootsnap', '>= 1.4.2', require: false
 gem 'rack-cors', require: 'rack/cors'
 gem 'devise_token_auth'
 gem 'stripe-rails'
+gem 'geocoder'
 
 group :development, :test do
   gem 'rspec-rails'

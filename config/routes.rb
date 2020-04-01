@@ -5,5 +5,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :articles, only: %i[index show create], constraints: { format: 'json' }
     resources :subscriptions, only: [ :create ], constraints: { format: 'json' } 
+    resources :sessions, only: [ :create ], constraints: { format: 'json' }
   end
 end
