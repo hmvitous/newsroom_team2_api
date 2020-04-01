@@ -3,12 +3,15 @@ class Api::SessionsController < ApplicationController
     lat = params[:location][:latitude].to_f
     long = params[:location][:longitude].to_f
     results = Geocoder.search([lat, long])
-    edition = (results.first.county.match? /Västerås kommun|King County/) ? results.first.county : "Global"
-    render json: { session: 
-    { location:
-      { latitude: lat,
-        longitude: long},
-      edition: edition}
+    edition = (results.first.county.match(/Västerås kommun|King County/)) ? results.first.county : "Global"
+    render json: {
+      session: {
+        location: {
+          latitude: lat,
+          longitude: long
+        },
+          edition: edition 
+      } 
     }
   end
 end
