@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class Api::ArticlesController < ApplicationController
-  before_action :authenticate_user!, only: [:create]
+  before_action :authenticate_user!, only: %i[create]
   before_action :check_user_role, only: [:create]
 
   def index
