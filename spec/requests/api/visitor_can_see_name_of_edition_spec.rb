@@ -11,9 +11,10 @@ RSpec.describe Api::SessionsController, type: :request do
       expect(response_json["session"]["edition"]).to eq "Västerås kommun"
     end
 
-    it ' returns a "session" object with location and edition name Seattle' do
-      post "/api/sessions", params: { location: {latitude: 47.60, longitude: -122.33 }}
-      expect(response_json["session"]["edition"]).to eq "King County"
+    it ' returns a "session" object with location and edition name Stockholm' do
+      post "/api/sessions", params: { location: {latitude: 59.31, longitude: 18.07 }}
+      binding.pry
+      expect(response_json["session"]["edition"]).to eq "Stockholm kommun"
     end
   end
 end
