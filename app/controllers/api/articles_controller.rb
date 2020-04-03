@@ -50,6 +50,6 @@ class Api::ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :teaser, :content, :article_class)
+    params.require(:article).permit(:title, :teaser, :content, :article_class, :image)
   end
 end
