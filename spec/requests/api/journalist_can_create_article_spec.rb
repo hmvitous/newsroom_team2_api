@@ -12,6 +12,15 @@ RSpec.describe Api::ArticlesController, type: :request do
   let(:visitor) { create(:user, role: '') }
   let(:visitor_headers) { { HTTP_ACCEPT: 'application/json' } }
 
+  let(:image) do
+    {
+      type: 'application/jpg',
+      encoder: 'name=new_iphone.jpg;base64',
+      data: 'iVBORw0KGgoAAAANSUhEUgAABjAAAAOmCAYAAABFYNwHAAAgAElEQVR4XuzdB3gU1cLG8Te9EEgISQi9I71KFbBXbFixN6zfvSiIjSuKInoVFOyIDcWuiKiIol4Q6SBVOtI7IYSWBkm',
+      extension: 'jpg'
+    }
+  end
+
   describe 'Journalist creates an article' do
     before do
       post '/api/articles',
@@ -20,7 +29,8 @@ RSpec.describe Api::ArticlesController, type: :request do
                title: 'Coronavirus',
                teaser: 'Things are bad',
                content: 'It will get worse.',
-               article_class: 'free'
+               article_class: 'free',
+               image: image
              }
            },
            headers: journalist_headers
