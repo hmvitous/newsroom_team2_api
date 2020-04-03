@@ -22,7 +22,7 @@ class Api::ArticlesController < ApplicationController
     article = Article.create(article_params)
     last_article = Article.last
     new_time = Time.now.strftime('%d-%m-%Y')
-    if article.persisted?
+    if article.persisted? && attach_image(article)
       last_article[:new_created_at] = new_time
       last_article.save
       render json: { message: 'Your article is ready for review.' }, status: 200
@@ -32,6 +32,14 @@ class Api::ArticlesController < ApplicationController
   end
 
   private
+
+  def attach_image(article) 
+    params_image = params['article']['image']
+
+    if params_image.present?
+      DecodeService.attach_image(params_image, article.image)
+    end
+  end
 
   def check_user_role
     user = current_user
