@@ -10,6 +10,7 @@ gem 'rack-cors', require: 'rack/cors'
 gem 'devise_token_auth'
 gem 'stripe-rails'
 gem 'geocoder'
+gem 'aws-sdk-s3'
 
 group :development, :test do
   gem 'rspec-rails'
