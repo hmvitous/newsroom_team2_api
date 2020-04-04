@@ -8,7 +8,7 @@ module DecodeService
     io.puts(decoded_data)
     io.rewind
 
-    target.attach(io: io, filename: 'base.#{image.extension}')
+    target.attach(io: io, filename: "#{image[:encoder]}.#{image[:extension]}")
   end
 
   private

@@ -9,7 +9,7 @@ class Api::ArticlesController < ApplicationController
     if collection_articles.empty?
       render json: { message: 'No articles has been found' }, status: 404
     else
-      render json: { articles: collection_articles.reverse }, status: 200
+      render json: { articles: collection_articles.reverse }, each_serializer: ArticleListSerializer, status: 200
    end
   end
 
@@ -50,6 +50,6 @@ class Api::ArticlesController < ApplicationController
   end
 
   def article_params
-    params.require(:article).permit(:title, :teaser, :content, :article_class, :image)
+    params.require(:article).permit(:title, :teaser, :content, :article_class)
   end
 end

@@ -11,6 +11,7 @@ gem 'devise_token_auth'
 gem 'stripe-rails'
 gem 'geocoder'
 gem 'aws-sdk-s3'
+gem 'active_model_serializers'
 
 group :development, :test do
   gem 'rspec-rails'
