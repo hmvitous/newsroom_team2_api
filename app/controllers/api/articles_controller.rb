@@ -5,17 +5,17 @@ class Api::ArticlesController < ApplicationController
   before_action :check_user_role, only: [:create]
 
   def index
-    collection_articles = Article.all
-    if collection_articles.empty?
+    articles = Article.all
+    if articles.empty?
       render json: { message: 'No articles has been found' }, status: 404
     else
-      render json: { articles: collection_articles.reverse }, each_serializer: ArticleListSerializer, status: 200
+      render json: articles.reverse, each_serializer: ArticleListSerializer,  status: 200
    end
   end
 
   def show
     article = Article.find(params[:id])
-    render json: article, status: 200
+    render json: article, serializer: ArticleListSerializer,  status: 200
   end
 
   def create
@@ -32,15 +32,6 @@ class Api::ArticlesController < ApplicationController
   end
 
   private
-
-  def attach_image(article) 
-    params_image = params['article']['image']
-
-    if params_image.present?
-      DecodeService.attach_image(params_image, article.image)
-    end
-  end
-
   def check_user_role
     user = current_user
     if user.role != 'journalist'
@@ -51,5 +42,13 @@ class Api::ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :teaser, :content, :article_class)
+  end
+
+  def attach_image(article) 
+    params_image = params['article']['image']
+
+    if params_image.present?
+      DecodeService.attach_image(params_image, article.image)
+    end
   end
 end
