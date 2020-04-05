@@ -5,11 +5,11 @@ class Api::ArticlesController < ApplicationController
   before_action :check_user_role, only: [:create]
 
   def index
-    articles = Article.all
-    if articles.empty?
+    collection_articles = Article.all
+    if collection_articles.empty?
       render json: { message: 'No articles has been found' }, status: 404
     else
-      render json: articles.reverse, each_serializer: ArticleListSerializer,  status: 200
+      render json: collection_articles.reverse, each_serializer: ArticleListSerializer,  status: 200
    end
   end
 
