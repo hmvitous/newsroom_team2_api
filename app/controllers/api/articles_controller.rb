@@ -41,7 +41,7 @@ class Api::ArticlesController < ApplicationController
     user = current_user
     if user.role != 'journalist'
       render json: { message: 'You are not authorized.' }, status: 401
-      nil
+      return
     end
   end
 
