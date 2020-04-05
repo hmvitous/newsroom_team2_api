@@ -9,13 +9,13 @@ class Api::ArticlesController < ApplicationController
     if collection_articles.empty?
       render json: { message: 'No articles has been found' }, status: 404
     else
-      render json: collection_articles.reverse, each_serializer: ArticleListSerializer,  status: 200
+      render json: collection_articles.reverse, each_serializer: ArticleListSerializer, status: 200
    end
   end
 
   def show
     article = Article.find(params[:id])
-    render json: article, serializer: ArticleListSerializer,  status: 200
+    render json: article, serializer: ArticleListSerializer, status: 200
   end
 
   def create
@@ -27,18 +27,21 @@ class Api::ArticlesController < ApplicationController
       last_article.save
       render json: { message: 'Your article is ready for review.' }, status: 200
     elsif article.persisted? && attach_image(article)
-    render json: { message: 'Your article is ready for review.' }, status: 200
+      last_article[:new_created_at] = new_time
+      last_article.save
+      render json: { message: 'Your article is ready for review.' }, status: 200
     else
       render json: { message: 'Your article was not saved.' }, status: 406
     end
   end
 
   private
+
   def check_user_role
     user = current_user
     if user.role != 'journalist'
       render json: { message: 'You are not authorized.' }, status: 401
-      return
+      nil
     end
   end
 
@@ -46,7 +49,7 @@ class Api::ArticlesController < ApplicationController
     params.require(:article).permit(:title, :teaser, :content, :article_class)
   end
 
-  def attach_image(article) 
+  def attach_image(article)
     params_image = params['article']['image']
 
     if params_image.present?
