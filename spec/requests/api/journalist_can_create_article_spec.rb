@@ -21,7 +21,7 @@ RSpec.describe Api::ArticlesController, type: :request do
     }
   end
 
-  describe 'Journalist creates an article' do
+  describe 'Journalist creates an article with an Image' do
     before do
       post '/api/articles',
            params: {
@@ -43,6 +43,53 @@ RSpec.describe Api::ArticlesController, type: :request do
     it 'succesfully creates Article entry' do
       entry = Article.last
       expect(entry.title).to eq 'Coronavirus'
+    end
+
+    it 'article has an image' do
+      article = Article.where(title: response.request.params['article']['title'])
+      expect(article.first.image.attached?).to eq true
+    end
+
+    it 'returns a success message' do
+      expect(response_json['message']).to eq 'Your article is ready for review.'
+    end
+  end
+
+  describe 'Journalist creates an article without image' do
+    before do
+      post '/api/articles',
+           params: {
+             article: {
+               title: 'Coronavirus',
+               teaser: 'Things are bad',
+               content: 'It will get worse.',
+               article_class: 'free',
+             }
+           },
+           headers: journalist_headers
+    end
+
+    it 'returns a 200 response status' do
+      expect(response.status).to eq 200
+    end
+
+    it 'succesfully creates Article entry' do
+      entry = Article.last
+      expect(entry.title).to eq 'Coronavirus'
+    end
+
+    it 'succesfully creates Article entry' do
+      entry = Article.last
+      expect(entry.new_created_at).to eq Time.now.strftime('%d-%m-%Y')
+    end
+
+    it 'article has no image' do
+      article = Article.where(title: response.request.params['article']['title'])
+      expect(article.first.image.attached?).to eq false
+    end
+
+    it 'returns a success message' do
+      expect(response_json['message']).to eq 'Your article is ready for review.'
     end
   end
 

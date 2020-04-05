@@ -95,7 +95,7 @@ RSpec.describe 'POST api/subscription', type: :request do
 
   describe "When stripe declines subscription for user" do
     before do
-        custom_error = StandardError.new("Subscription couldn't be created")
+        custom_error = StandardError.new("Transaction did not go through")
         StripeMock.prepare_error(custom_error, :create_subscription )
         post '/api/subscriptions',
         params: {
@@ -109,7 +109,7 @@ RSpec.describe 'POST api/subscription', type: :request do
     end
 
     it "returns error message" do
-        expect(response_json['error_message']).to eq "Subscription couldn't be created"
+        expect(response_json['error_message']).to eq "Transaction did not go through"
     end
   end
 end
